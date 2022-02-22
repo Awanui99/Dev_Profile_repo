@@ -18,4 +18,14 @@ svg {
     width: 400px;
     display: block;
     border: 1px dashed lightcoral;
-  }
+}
+
+/* .Circle {
+    animation: rotate 6s linear infinite;
+    transform-origin: center;
+}
+
+@keyframes rotate {
+    from {transform: rotate(0deg); }
+    to {transform: rotate(360deg); }
+} */

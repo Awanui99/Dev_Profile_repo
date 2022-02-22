@@ -1,23 +1,18 @@
 
 
-let xLocArray = [];
-let yLocArray = [];
-let circleArray = [];
-let animationArray = []
-let counter = 0;
-
 var svgws = "http://www.w3.org/2000/svg";
+const SVG = document.querySelector('#spiralSVG');
 var width = 400;
 var height = 400;
-var numOfCircles = 100;
+var numOfCircles = 300;
   
 var phi = (Math.sqrt(5)+1)/2 - 1;            // golden ratio
 var golden_angle = phi*2*Math.PI;            // golden angle
 var lg_rad = width * .45;
 
 var circleRad = '2';
-var cx = width/2;
-var cy = height/2;
+var cx = 0;
+var cy = 0;
 
 for(var i = 1; i <= numOfCircles; ++i) {
     var ratio = i/numOfCircles;
@@ -25,52 +20,60 @@ for(var i = 1; i <= numOfCircles; ++i) {
     var spiral_rad = ratio * lg_rad;
     var x = cx + Math.cos(angle) * spiral_rad;
     var y = cy + Math.sin(angle) * spiral_rad;
+    var animRadX;
+    var animRadY;
 
-    xLocArray.push(x.toFixed(2));
+    let animationDelay = i / 100;
+    let animationDuration = 0.5;
 
-    yLocArray.push(y.toFixed(2));
-}
-
-//Create circle function
-function createNewCircle() {
+    var animationOut = document.createElementNS(svgws,'animateTransform');
+    var animationRotateInPlace = document.createElementNS(svgws,'animateTransform')
+    var animationOrbit = document.createElementNS(svgws, 'animateTransform')
+    var g = document.createElementNS(svgws,'g');
+    var gTransform = document.createElementNS(svgws,'g');
     var circle = document.createElementNS(svgws,'circle');
-    var animation = document.createElementNS(svgws,'animateTransform');
 
-    var x = xLocArray[counter];
-    var y = yLocArray[counter];
+    //Rotate in place animation
+    animationRotateInPlace.setAttributeNS(null, 'attributeName', 'transform');
+    animationRotateInPlace.setAttributeNS(null, 'type', 'rotate');
+    animationRotateInPlace.setAttributeNS(null, 'from', '360');
+    animationRotateInPlace.setAttributeNS(null, 'to', '0');
+    animationRotateInPlace.setAttributeNS(null, 'dur', '5s');
+    animationRotateInPlace.setAttributeNS(null, 'repeatCount', 'indefinite');
+
+    //Orbit rotate
+    animationOrbit.setAttributeNS(null, 'attributeName', 'transform');
+    animationOrbit.setAttributeNS(null, 'type', 'rotate');
+    animationOrbit.setAttributeNS(null, 'from', '0');
+    animationOrbit.setAttributeNS(null, 'to', '360');
+    animationOrbit.setAttributeNS(null, 'dur', '1s');
+    animationOrbit.setAttributeNS(null, 'repeatCount', 'indefinite');
+    
+    //Creating the animation
+    animationOut.setAttributeNS(null, 'attributeName', 'transform');
+    animationOut.setAttributeNS(null, 'type', 'translate');
+    animationOut.setAttributeNS(null, 'from', `${cx} ${cy}`);
+    animationOut.setAttributeNS(null, 'to', `${x} ${y}`);
+    animationOut.setAttributeNS(null, 'begin', `${animationDelay}s`);
+    animationOut.setAttributeNS(null, 'dur', `${animationDuration}s`);
+    animationOut.setAttributeNS(null, 'repeatCount', '1');
+    animationOut.setAttributeNS(null, 'fill', 'freeze');
+
+    //Creating <g> gTransform
+    gtransform.setAttributeNS(null, 'transform', ``)
 
     //Placing the circles
-    circle.setAttributeNS(null, 'cx', 0);
-    circle.setAttributeNS(null, 'cy', 0);
+    circle.setAttributeNS(null, 'cx', cx);
+    circle.setAttributeNS(null, 'cy', cy);
     circle.setAttributeNS(null, 'r', circleRad);
     circle.setAttributeNS(null, 'fill', 'black');
     circle.setAttributeNS(null, 'class', 'Circle');
 
-    //Creating the animation
-    animation.setAttributeNS(null, 'attributeName', 'transform');
-    animation.setAttributeNS(null, 'type', 'translate');
-    animation.setAttributeNS(null, 'from', `${cx} ${cy}`);
-    animation.setAttributeNS(null, 'to', `${x} ${y}`);
-    animation.setAttributeNS(null, 'begin', '0s');
-    animation.setAttributeNS(null, 'dur', '1s');
-    animation.setAttributeNS(null, 'repeatCount', 'indefinite');
+    gTransform.appendChild()
+    g.appendChild(animationRotateInPlace);
+    g.appendChild(gTransform)
 
-    //Sending to draw
-    drawCircles(circle, animation);
-
-    counter += 1;
-    console.log(counter);
-    if (counter === numOfCircles) {
-        clearInterval(timer);
-    }
+    // g.appendChild()
+    circle.appendChild(animationOut);
+    SVG.appendChild(circle);
 }
-
-//Draw function
-function drawCircles(circle, animation) {
-    // Appending all elements
-    circle.appendChild(animation);
-    document.getElementById('spiralSVG').appendChild(circle);
-
-}
-
-setInterval(createNewCircle, 1000);

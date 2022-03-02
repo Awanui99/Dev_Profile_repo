@@ -1,75 +1,91 @@
 
+const svgns = "http://www.w3.org/2000/svg";
+const SVG = document.querySelector('#spiralSVG');
 
-//Loop Timer
+const circle = document.createElementNS(svgns, 'circle');
+circle.setAttributeNS(null, 'cx', '0');
+circle.setAttributeNS(null, 'cy', '0');
+circle.setAttribute('r', '1');
 
-const forLoopTimer = (time) => {
-    return new Promise((resolve) => setTimeout(resolve, time));
-}
-var i;
+const circleCenter = document.createElementNS(svgns, 'circle');
+circleCenter.setAttributeNS(null, 'cx', '0');
+circleCenter.setAttributeNS(null, 'cy', '0');
+circleCenter.setAttributeNS(null, 'r', '5');
+circleCenter.setAttribute('fill', 'none');
 
-var svgws = "http://www.w3.org/2000/svg";
-var width = 400;
-var height = 400;
-var numOfCircles = 300;
-  
-var phi = (Math.sqrt(5)+1)/2 - 1;            // golden ratio
-var golden_angle = phi*2*Math.PI;            // golden angle
-var lg_rad = width * .45;
+var linearGradient = document.createElementNS(svgns, 'LinearGradient');
+linearGradient.setAttribute("id", 'fade')
+var stopBlack = document.createElementNS(svgns, 'stop');
+stopBlack.setAttribute("offset", '0%');
+stopBlack.setAttribute("stop-color", 'black');
+var stopWhite = document.createElementNS(svgns, 'stop');
+stopWhite.setAttribute("offset", '90%');
+stopWhite.setAttribute("stop-color", 'white');
 
-var circleRad = '2';
-var cx = width/2;
-var cy = height/2;
+linearGradient.appendChild(stopBlack);
+linearGradient.appendChild(stopWhite);
 
-const startLoop = async () => {
-    for(i = 1; i <= numOfCircles; ++i) {
 
-        var ratio = i/numOfCircles;
-        var angle = i*golden_angle;
-        var spiral_rad = ratio * lg_rad;
-        var x = cx + Math.cos(angle) * spiral_rad;
-        var y = cy + Math.sin(angle) * spiral_rad;
-        var circle = document.createElementNS(svgws,'circle');
-        var animation = document.createElementNS(svgws,'animateTransform');
+// var animationOutX = document.createElementNS(svgns, 'animate');
+// animationOutX.setAttribute("id","myAnimationX"); 
+// animationOutX.setAttribute("attributeType","XML"); 
+// animationOutX.setAttribute("attributeName","cx"); 
+// animationOutX.setAttributeNS(null,"values","0;100;0");
+// animationOutX.setAttribute("begin","0s");
+// animationOutX.setAttribute("dur","2s"); 
+// animationOutX.setAttribute("repeatCount","indefinite");
+// animationOutX.setAttribute("class","animationX");
 
-        //Creating the animation
-        animation.setAttributeNS(null, 'attributeName', 'transform');
-        animation.setAttributeNS(null, 'type', 'translate');
-        animation.setAttributeNS(null, 'from', `${cx} ${cy}`);
-        animation.setAttributeNS(null, 'to', `${x} ${y}`);
-        animation.setAttributeNS(null, 'begin', '0s');
-        animation.setAttributeNS(null, 'dur', '0.5s');
-        animation.setAttributeNS(null, 'repeatCount', '1')
+var animationOutY = document.createElementNS(svgns, 'animate');
+animationOutY.setAttribute("attributeType","XML"); 
+animationOutY.setAttribute("attributeName","r"); 
+animationOutY.setAttributeNS(null,"values","2;3");
+animationOutY.setAttribute("begin","0s");
+animationOutY.setAttribute("dur","2s"); 
+animationOutY.setAttribute("repeatCount","indefinite");
 
-        //Placing the circles
-        circle.setAttributeNS(null, 'cx', 0);
-        circle.setAttributeNS(null, 'cy', 0);
-        circle.setAttributeNS(null, 'r', circleRad);
-        circle.setAttributeNS(null, 'fill', 'black');
-        circle.setAttributeNS(null, 'class', 'Circle');
+//Rotate on orbit
+var animateMotion = document.createElementNS(svgns, 'animate'); 
+animateMotion.setAttribute("attributeType","XML"); 
+animateMotion.setAttribute("attributeName","cy");
+animateMotion.setAttributeNS(null,"values","0;100;0");
+animateMotion.setAttribute("calcMode","spline"); 
+animateMotion.setAttribute("dur","2s"); 
+animateMotion.setAttribute("repeatCount","indefinite");
+animateMotion.setAttribute("keyTimes","0; 0.5; 1");
+animateMotion.setAttribute("keySplines","0.5 0 0.5 1; 0.5 0 0.5 1");
 
-        // circle.appendChild(animation);
-        // document.getElementById('spiralSVG').appendChild(circle);
+var gTranslate = document.createElementNS(svgns, 'g');
+// gTranslate.setAttribute('transform', 'translate(100, 0)');
 
-        animateCircles(circle, animation, x, y)
+var g = document.createElementNS(svgns, 'g');
 
-        await forLoopTimer(1000); //Loop Timer
-    }
-}
+var gRotate = document.createElementNS(svgns, 'g');
 
-startLoop();
+var animationRotate = document.createElementNS(svgns, 'animateTransform'); 
+animationRotate.setAttribute("id","myAnimationY"); 
+animationRotate.setAttribute("attributeType","XML"); 
+animationRotate.setAttribute("attributeName","transform");
+animationRotate.setAttribute('type', 'rotate')
+animationRotate.setAttributeNS(null,"values","0;360");
+animationRotate.setAttribute("begin","0s");
+animationRotate.setAttribute("dur","8s"); 
+animationRotate.setAttribute("repeatCount","indefinite");
 
-function animateCircles(circle, animation, x, y) {
-    var animation = document.createElementNS(svgws,'animateTransform');
+// circle.appendChild(animationOutX);
+// circle.appendChild(animationOutY);
+circle.appendChild(animateMotion);
+circle.appendChild(animationOutY)
+gTranslate.appendChild(circle);
+g.appendChild(animationRotate);
+g.appendChild(gTranslate);
+SVG.appendChild(circleCenter);
+SVG.appendChild(g);
 
-        //Creating the animation
-        animation.setAttributeNS(null, 'attributeName', 'transform');
-        animation.setAttributeNS(null, 'type', 'translate');
-        animation.setAttributeNS(null, 'from', `${cx} ${cy}`);
-        animation.setAttributeNS(null, 'to', `${x} ${y}`);
-        animation.setAttributeNS(null, 'begin', '0s');
-        animation.setAttributeNS(null, 'dur', '0.5s');
-        animation.setAttributeNS(null, 'repeatCount', '1')
-    
-    circle.appendChild(animation);
-    document.getElementById('spiralSVG').appendChild(circle);
-}
+SVG.addEventListener('mouseover', () => {
+    SVG.pauseAnimations();
+});
+
+SVG.addEventListener('mouseleave', () => {
+    SVG.unpauseAnimations();
+});

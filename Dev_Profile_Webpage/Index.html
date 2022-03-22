@@ -4,15 +4,215 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <link rel="stylesheet" href="styles.css">
 
-    <script src="script.js" type="text/javascript" defer></script>
+    <script src="script.js" defer></script>
+    <script src="CircleLocationXY.js" type="text/javascript" defer></script>
+    <script src="LoadingScreen.js" type="text/javascript" defer></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
     <title>Awanui Shirley</title>
 </head>
 <body>
-    <svg id="spiralSVG" viewBox="-200 -200 400 400" xmlns="http://www.w3.org/2000/svg">
-    </svg>
+  <!-- NAVBAR -->
+  <div class="container-fluid p-0 mr-0 ml-0 shadow-lg rounded-bottom sticky" id="nav">
+    <!-- <ul class="breadcrumb justify-content-center mb-0 w-100" id="nav">
+        <li class="breadcrumb-item"><a href="#" >About</a></li>
+        <li class="breadcrumb-item"><a href="#" >Projects</a></li>
+        <li class="breadcrumb-item"><a href="#" >Contact</a></li>
+    </ul> -->
+    <nav class="nav nav-pills justify-content-center navbar-custom flex-nowrap rounded-bottom p-1">
+      <a id="nav-about" class="nav-item nav-link navbar-text-custom navbar-active" href="#">About</a>
+      <a id="nav-projects" class="nav-item nav-link navbar-text-custom" href="#Projects">Projects</a>
+      <a id="nav-contact" class="nav-item nav-link navbar-text-custom" href="#say-hello">Contact</a>
+    </nav>
+  </div>
+  <!-- WRAPPER -->
+<div class="wrapper pt-4" id="main-wrapper">
+
+  <!-- BACKGROUND -->
+  <div id="wrapper-img">
+    
+    <div class="background"></div>
+
+    <div class="container foreground p-0 w-100" id="foreground-container">
+
+      
+
+      <!-- PROFILE -->
+      <div class="container pt-4 shadow-lg rounded-bottom" id="Introduction">
+          
+          <!-- FIRST ROW -->
+          <div class="row w-100 m-0 rounded">
+              <section class="col-sm d-flex justify-content-center align-content-center pt-4 pb-4 transparent-background">
+                  <img  id="Thumbnail" class="rounded-circle shadow-lg" alt="100x100" src="Images/Awa Profile pic suit.jpg"
+            data-holder-rendered="true">
+                  <cite></cite>
+              </section>
+              <!-- SIDE TEXT -->
+              <section class="col-sm d-flex flex-column justify-content-center align-content-center pt-4 shadow rounded-bottom text-center">
+                  <h1 class="">G'day!</h1><br><br>
+                  <p class="about-myself">My name is Awanui and I'm an aspiring Web Developer!</p>
+              </section>
+          </div>
+          
+          <!-- ABOUT MYSELF -->
+          <div class="row w-100 m-0 mt-4 p-2 white-background rounded-top">
+            <div class="rounded p-4 w-100 m-0 shadow-sm text-center">
+              <h4>About Me</h4><br><br>
+              <p class="about-myself">Growin' up in the harsh Australian Outback, we learned to solve difficult everyday problems that in some situations could have meant life or death. Some of those daring times include...<br><br>
+              That time me and Johno couldn't work out what JSON was and why the data we got from the Weather API couldn't tell us when the swell was good.<br><br>
+              Or that other time when me n' Ol' Steve Irwin wrangled with the fabled Anaconda&reg;<br><br><br>
+              Trying times indeed...</p>
+            </div>
+          </div>
+          
+          <!-- DIVIDER -->
+          <div class="row w-100 m-0 pt-4 white-background rounded-bottom">
+            <svg class="m-0 divider" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+                <line class="dividerFadeIn" x1="-1000" y1="0" x2="1000" y2="110" stroke-width="20" stroke="#E3E0D2" fill="none"></line>
+                <line class="dividerFadeIn" x1="-1000" y1="40" x2="1000" y2="150" stroke-width="20" stroke="#E3E0D2"fill="none"></line>
+            </svg>
+          </div>
+      </div>
+
+      <!-- PROJECTS -->
+      <div class="container pt-4 pb-4 pl-0 pr-0 rounded shadow-lg mt-5" id="Projects">
+        <div id="carouselArrows" class="carousel slide shadow" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#carouselArrows" data-slide-to="0" class="active"></li>
+              <li data-target="#carouselArrows" data-slide-to="1"></li>
+              <li data-target="#carouselArrows" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+              <div class="carousel-item active" id="project1">
+                  <div style="width: 100%; height: 80vh; background: linear-gradient(to right top, #2B4563, white);"></div>
+                <div class="carousel-caption d-none d-md-block project-caption">
+                    <h5>Project 1</h5>
+                    <p>This is my First project</p>
+                  </div>
+              </div>
+              <div class="carousel-item" id="project2">
+                <div style="width: 100%; height: 80vh; background: linear-gradient(to right top, #2B4563, white);"></div>
+                <div class="carousel-caption d-none d-md-block project-caption">
+                    <h5>Project 2</h5>
+                    <p>This is my Second Project</p>
+                  </div>
+              </div>
+              <div class="carousel-item" id="project3">
+                <div style="width: 100%; height: 80vh; background: linear-gradient(to right top, #2B4563, white);"></div>
+                <div class="carousel-caption d-none d-md-block project-caption">
+                    <h5>Project 3</h5>
+                    <p>This is my Third Project</p>
+                  </div>
+              </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselArrows" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselArrows" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+        </div>
+      </div>
+
+      <!-- SAY HELLO EFFECT -->
+      <div class="container mt-5 rounded shadow-lg p-0" id="say-hello">
+        <svg class="divider" id="svgSay-Hello" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+          <text id="S-svg" x="23%" y="350" class="BigHelvetica">S</text>
+          <text id="A-svg" x="23%" y="550" class="BigHelvetica">A</text>
+          <text id="Y-svg" x="23%" y="750" class="BigHelvetica">Y</text>
+          <text id="H-svg" x="23%" y="950" class="BigHelvetica">H</text>
+          <text id="I-svg" x="40%" y="1150" class="BigHelvetica">I</text>
+          <text id="exclamation-svg" x="38%" y="1350" class="BigHelvetica">!</text>
+        </svg>
+      </div>
+
+      <!-- CONTACT FORM -->
+      <div class="container mt-0 mb-5 p-4 shadow-lg rounded-bottom" id="Contact">
+        <form action="#" method="post">
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Email</label>
+            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1">Message</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+          </div>
+          <button class="submit-btn btn">Submit</button>
+        </form>
+      </div>
+
+      <!-- SOCIAL LINKS -->
+      <div class="container m-0 w-100 m-0 p-2 shadow-sm rounded-top social-links" id="social-links">
+        <div class="container d-flex flex-row justify-content-center align-items-center h-100">
+          <!-- MOBILE -->
+          <a href="tel:+64220755768" class="mr-4 icon-social p-2 shadow-sm rounded border-0" alt="Mobile" id="mobile-button">
+            <svg id="mobile-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1{fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.5px;}</style></defs><g id="ic-contact-mobile"><rect class="cls-1" x="6.08" y="1.75" width="11.87" height="20.37" rx="2"/><rect class="cls-1" x="11.37" y="17.13" width="1.29" height="1.29" rx="0.64"/></g></svg>
+          </a>
+            <!-- PROFILE -->
+          <button class="icon-social p-2 shadow-sm rounded border-0" alt="LinkedIn" id="profile-button">
+            <svg id="profile-icon" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+              <path fill="var(--ci-primary-color, currentColor)" d="M472,48H40A24.028,24.028,0,0,0,16,72V440a24.028,24.028,0,0,0,24,24h88V405.178A20.01,20.01,0,0,1,138.284,387.7l91.979-51.123L200,260.919V200a56,56,0,0,1,112,0v60.919l-30.263,75.655L373.716,387.7h0A20.011,20.011,0,0,1,384,405.178V464h88a24.028,24.028,0,0,0,24-24V72A24.028,24.028,0,0,0,472,48Zm-8,384H416V405.178a52.027,52.027,0,0,0-26.738-45.451h0L321.915,322.3,344,267.081V200a88,88,0,0,0-176,0v67.081L190.085,322.3l-67.347,37.432A52.027,52.027,0,0,0,96,405.178V432H48V80H464Z" class="ci-primary"/>
+            </svg>
+          </button>
+          <!-- EMAIL -->
+          <a href="mailto:awanui1999@gmail.com" class="ml-4 icon-social p-2 shadow-sm rounded border-0" alt="Email" id="email-button">
+            <svg id="email-icon" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            	 viewBox="0 0 330.001 330.001" style="enable-background:new 0 0 330.001 330.001;" xml:space="preserve">
+            <g id="XMLID_348_">
+            	<path id="XMLID_350_" d="M173.871,177.097c-2.641,1.936-5.756,2.903-8.87,2.903c-3.116,0-6.23-0.967-8.871-2.903L30,84.602
+            		L0.001,62.603L0,275.001c0.001,8.284,6.716,15,15,15L315.001,290c8.285,0,15-6.716,15-14.999V62.602l-30.001,22L173.871,177.097z"
+            		/>
+            	<polygon id="XMLID_351_" points="165.001,146.4 310.087,40.001 19.911,40 	"/>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            </svg>        
+          </a>
+        </div>
+        
+      </div>
+      <div class="container d-flex justify-content-center social-links pb-4 pt-4" id="specialEffect">
+        <svg id="spiralSVG" class="rounded-circle shadow-lg" viewBox="-50 -50 100 100" xmlns="http://www.w3.org/2000/svg"></svg>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>

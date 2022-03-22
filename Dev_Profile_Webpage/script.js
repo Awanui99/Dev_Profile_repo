@@ -1,91 +1,84 @@
 
-const svgns = "http://www.w3.org/2000/svg";
-const SVG = document.querySelector('#spiralSVG');
 
-const circle = document.createElementNS(svgns, 'circle');
-circle.setAttributeNS(null, 'cx', '0');
-circle.setAttributeNS(null, 'cy', '0');
-circle.setAttribute('r', '1');
+window.onload= () => {
+    wrapper.scroll({
+        top: 0,
+        behavior: 'smooth'  
+      });
+}
 
-const circleCenter = document.createElementNS(svgns, 'circle');
-circleCenter.setAttributeNS(null, 'cx', '0');
-circleCenter.setAttributeNS(null, 'cy', '0');
-circleCenter.setAttributeNS(null, 'r', '5');
-circleCenter.setAttribute('fill', 'none');
+// SELECTORS
+const wrapper = document.querySelector('#main-wrapper');
+const navAbout = document.querySelector('#nav-about');
+const navProjects = document.querySelector('#nav-projects');
+const navContact = document.querySelector('#nav-contact');
 
-var linearGradient = document.createElementNS(svgns, 'LinearGradient');
-linearGradient.setAttribute("id", 'fade')
-var stopBlack = document.createElementNS(svgns, 'stop');
-stopBlack.setAttribute("offset", '0%');
-stopBlack.setAttribute("stop-color", 'black');
-var stopWhite = document.createElementNS(svgns, 'stop');
-stopWhite.setAttribute("offset", '90%');
-stopWhite.setAttribute("stop-color", 'white');
+const body = document.body;
+const sayHiDiv = document.querySelector('#say-hello')
+const contactFormDiv = document.querySelector('#Contact')
+const projectsDiv = document.querySelector('#Projects')
 
-linearGradient.appendChild(stopBlack);
-linearGradient.appendChild(stopWhite);
+// SCROLL FUNCTION
+wrapper.addEventListener('scroll', event => {
+    // console.log(wrapper.scrollTop);
+    // ABOUT PAGE
+    if (wrapper.scrollTop >= 0 && wrapper.scrollTop < 800) {
+        navAbout.classList.add('navbar-active');
 
+        navProjects.classList.remove('navbar-active');
+        navContact.classList.remove('navbar-active');
+    }
 
-// var animationOutX = document.createElementNS(svgns, 'animate');
-// animationOutX.setAttribute("id","myAnimationX"); 
-// animationOutX.setAttribute("attributeType","XML"); 
-// animationOutX.setAttribute("attributeName","cx"); 
-// animationOutX.setAttributeNS(null,"values","0;100;0");
-// animationOutX.setAttribute("begin","0s");
-// animationOutX.setAttribute("dur","2s"); 
-// animationOutX.setAttribute("repeatCount","indefinite");
-// animationOutX.setAttribute("class","animationX");
+    // PROJECTS PAGE
+    if (wrapper.scrollTop >= 700 && wrapper.scrollTop < 1700) {
+        navProjects.classList.add('navbar-active');
 
-var animationOutY = document.createElementNS(svgns, 'animate');
-animationOutY.setAttribute("attributeType","XML"); 
-animationOutY.setAttribute("attributeName","r"); 
-animationOutY.setAttributeNS(null,"values","2;3");
-animationOutY.setAttribute("begin","0s");
-animationOutY.setAttribute("dur","2s"); 
-animationOutY.setAttribute("repeatCount","indefinite");
+        navAbout.classList.remove('navbar-active');
+        navContact.classList.remove('navbar-active');
+    }
 
-//Rotate on orbit
-var animateMotion = document.createElementNS(svgns, 'animate'); 
-animateMotion.setAttribute("attributeType","XML"); 
-animateMotion.setAttribute("attributeName","cy");
-animateMotion.setAttributeNS(null,"values","0;100;0");
-animateMotion.setAttribute("calcMode","spline"); 
-animateMotion.setAttribute("dur","2s"); 
-animateMotion.setAttribute("repeatCount","indefinite");
-animateMotion.setAttribute("keyTimes","0; 0.5; 1");
-animateMotion.setAttribute("keySplines","0.5 0 0.5 1; 0.5 0 0.5 1");
+    // CONTACT PAGE
+    if (wrapper.scrollTop >= 1700) {
+        navContact.classList.add('navbar-active');
 
-var gTranslate = document.createElementNS(svgns, 'g');
-// gTranslate.setAttribute('transform', 'translate(100, 0)');
+        navAbout.classList.remove('navbar-active');
+        navProjects.classList.remove('navbar-active');
+    }
+}, { passive: true });
 
-var g = document.createElementNS(svgns, 'g');
+// AUTO SCROLL FUNCTION
+navAbout.addEventListener('click', () => {
+    wrapper.scroll({
+        top: 0,
+        behavior: 'smooth'  
+      });
+    
+})
 
-var gRotate = document.createElementNS(svgns, 'g');
+navProjects.addEventListener('click', () => {
+    projectsDiv.scrollIntoView({behaviour: 'smooth'});
+})
 
-var animationRotate = document.createElementNS(svgns, 'animateTransform'); 
-animationRotate.setAttribute("id","myAnimationY"); 
-animationRotate.setAttribute("attributeType","XML"); 
-animationRotate.setAttribute("attributeName","transform");
-animationRotate.setAttribute('type', 'rotate')
-animationRotate.setAttributeNS(null,"values","0;360");
-animationRotate.setAttribute("begin","0s");
-animationRotate.setAttribute("dur","8s"); 
-animationRotate.setAttribute("repeatCount","indefinite");
+navContact.addEventListener('click', () => {
+    sayHiDiv.scrollIntoView({behaviour: "smooth"});
+})
 
-// circle.appendChild(animationOutX);
-// circle.appendChild(animationOutY);
-circle.appendChild(animateMotion);
-circle.appendChild(animationOutY)
-gTranslate.appendChild(circle);
-g.appendChild(animationRotate);
-g.appendChild(gTranslate);
-SVG.appendChild(circleCenter);
-SVG.appendChild(g);
+// CLICKABLE SOCIAL ICONS
+const emailBtn = document.querySelector('#email-button');
+const profileBtn = document.querySelector('#profile-button');
+const mobileBtn = document.querySelector('#mobile-button');
 
-SVG.addEventListener('mouseover', () => {
-    SVG.pauseAnimations();
-});
+// EMAIL BUTTON
+emailBtn.addEventListener('click', () => {
 
-SVG.addEventListener('mouseleave', () => {
-    SVG.unpauseAnimations();
-});
+})
+
+// PROFILE BUTTON
+profileBtn.addEventListener('click', () => {
+    window.open('https://www.linkedin.com/in/awanui-shirley-8498b9210/', '_blank');
+})
+
+// MOBILE BUTTON
+mobile.addEventListener('click', () => {
+    window.open('tel:+64220755768', '_self')
+})

@@ -231,14 +231,13 @@ background-size: cover;
 }
 
 .navbar-text-custom {
-    text-decoration: none;
-    color: #ffa583;
-    transition: color 0.5s ease-in-out;
-    cursor: pointer;
+    color: #ffa583 !important;
+    transition: color 0.5s ease-in-out !important;
+    cursor: pointer !important;
 }
 
 .navbar-text-custom:hover {
-    color: black;
+    color: black !important;
     -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -252,14 +251,14 @@ background-size: cover;
 
 .navbar-active {
     background-color: #ffa583;
-    color: white;
-    transition: background-color 0.5s ease-in-out;
+    color: white !important;
+    transition: background-color 0.5s ease-in-out !important;
     border-radius: none;
 }
 
 .navbar-active:hover {
     background-color: #ff615d;
-    color: white;
+    color: white !important;
 }
 
 #spiralSVG {

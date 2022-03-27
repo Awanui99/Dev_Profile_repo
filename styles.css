@@ -338,10 +338,24 @@ background-size: cover;
     paint-order: stroke;
     stroke-width: 7;
     animation: moveZ 3s steps(7, start) infinite;
+    -webkit-animation: moveZ 3s steps(7, start) infinite;
+    -moz-animation: moveZ 3s steps(7, start) infinite;
 }
 
 /* Say Hello Animation */
 @keyframes moveZ {
+    100% {
+        transform: translateY(-1400px);
+     } 
+}
+
+@-webkit-keyframes moveZ {
+    100% {
+        transform: translateY(-1400px);
+     } 
+}
+
+@-moz-keyframes moveZ {
     100% {
         transform: translateY(-1400px);
      } 

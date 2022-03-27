@@ -377,13 +377,13 @@ background-size: cover;
 
 @-webkit-keyframes moveZ {
     100% {
-        transform: translateY(-1400px);
+        -webkit-transform: translateY(-1400px);
      } 
 }
 
 @-moz-keyframes moveZ {
     100% {
-        transform: translateY(-1400px);
+        -moz-transform: translateY(-1400px);
      } 
 }
 

@@ -6,7 +6,7 @@ const navProjects = document.querySelector('#nav-projects');
 const navContact = document.querySelector('#nav-contact');
 
 const wrapper = document.querySelector('#main-wrapper');
-const aboutDiv = document.querySelector('#Introduction');
+const aboutDiv = document.querySelector('#Thumbnail');
 const projectsDiv = document.querySelector('#Projects');
 const contactContainer = document.querySelector('#contactContainer');
 var isSmoothScrollSupported = 'scrollBehavior' in document.documentElement.style;
@@ -18,25 +18,22 @@ wrapper.onscroll = () => {
         navAbout.classList.remove('navbar-active');
         navContact.classList.remove('navbar-active');
         navProjects.classList.add('navbar-active');
-        console.log('navProjects is now active')
     }
     else if (wrapper.scrollTop >= (contactContainer.offsetTop - 150)) {
         navAbout.classList.remove('navbar-active');
         navContact.classList.add('navbar-active');
         navProjects.classList.remove('navbar-active');
-        console.log('contactContainer is now active')
     }
     else {
         navAbout.classList.add('navbar-active');
         navContact.classList.remove('navbar-active');
         navProjects.classList.remove('navbar-active');
-        console.log('About is active')
     }
 }
 
 // BUTTONS
 navAbout.addEventListener('click', () => {
-    doScrolling(aboutDiv)
+    doScrolling(aboutDiv);
 });
 navProjects.addEventListener('click', () => {
     doScrolling(projectsDiv)

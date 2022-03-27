@@ -1,12 +1,11 @@
 
 
-let doScrolling;
 const navAbout = document.querySelector('#nav-about');
 const navProjects = document.querySelector('#nav-projects');
 const navContact = document.querySelector('#nav-contact');
 
 const wrapper = document.querySelector('#main-wrapper');
-const aboutDiv = document.querySelector('#Introduction');
+const aboutDiv = document.querySelector('#Thumbnail');
 const projectsDiv = document.querySelector('#Projects');
 const contactContainer = document.querySelector('#contactContainer');
 var isSmoothScrollSupported = 'scrollBehavior' in document.documentElement.style;
@@ -18,25 +17,22 @@ wrapper.onscroll = () => {
         navAbout.classList.remove('navbar-active');
         navContact.classList.remove('navbar-active');
         navProjects.classList.add('navbar-active');
-        console.log('navProjects is now active')
     }
     else if (wrapper.scrollTop >= (contactContainer.offsetTop - 150)) {
         navAbout.classList.remove('navbar-active');
         navContact.classList.add('navbar-active');
         navProjects.classList.remove('navbar-active');
-        console.log('contactContainer is now active')
     }
     else {
         navAbout.classList.add('navbar-active');
         navContact.classList.remove('navbar-active');
         navProjects.classList.remove('navbar-active');
-        console.log('About is active')
     }
 }
 
 // BUTTONS
 navAbout.addEventListener('click', () => {
-    doScrolling(aboutDiv)
+    doScrolling(aboutDiv);
 });
 navProjects.addEventListener('click', () => {
     doScrolling(projectsDiv)
@@ -46,57 +42,57 @@ navContact.addEventListener('click', () => {
 });
 
 // NORMAL SMOOTH SCROLL FUNC
-const smoothScrollFunc = function (element, navButton) {
+let doScrolling = function (element, navButton) {
 
     element.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
 }
 
 // WORK AROUND SCROLL LOOP
-let prevElement = 0;
-let counter = 0;
+// let prevElement = 0;
+// let counter = 0;
 
-const workAroundScrollFunc = function(element) {
+// const workAroundScrollFunc = function(element) {
 
-    let elementYPos = element.getBoundingClientRect().y;
+//     let elementYPos = element.getBoundingClientRect().y;
 
-    if (element.offsetTop === prevElement.offsetTop) {
-        return
-    }
+//     if (element.offsetTop === prevElement.offsetTop) {
+//         return
+//     }
 
-    else if ( wrapper.scrollTop > element.offsetTop) {
-        let timer = setInterval(() => {
-            wrapper.scrollBy(0, (Math.floor(elementYPos * 0.02) + 48));
+//     else if ( wrapper.scrollTop > element.offsetTop) {
+//         let timer = setInterval(() => {
+//             wrapper.scrollBy(0, (Math.floor(elementYPos * 0.02) + 48));
 
-            counter++
+//             counter++
 
-            if (wrapper.scrollTop <= element.offsetTop) {
-                clearInterval(timer);
-                counter = 0;
-            }
-        }, 1)
-    }
-    else if (wrapper.scrollTop < element.offsetTop) {
-        let timer = setInterval(() => {
-            wrapper.scrollBy(0, (Math.floor(elementYPos * 0.02) - 48));
+//             if (wrapper.scrollTop <= element.offsetTop) {
+//                 clearInterval(timer);
+//                 counter = 0;
+//             }
+//         }, 1)
+//     }
+//     else if (wrapper.scrollTop < element.offsetTop) {
+//         let timer = setInterval(() => {
+//             wrapper.scrollBy(0, (Math.floor(elementYPos * 0.02) - 48));
 
-            counter++
+//             counter++
 
-            if (wrapper.scrollTop >= element.offsetTop) {
-                clearInterval(timer);
-                counter = 0;
-            }
-        }, 1)
-    }
-    prevElement = element
-}
+//             if (wrapper.scrollTop >= element.offsetTop) {
+//                 clearInterval(timer);
+//                 counter = 0;
+//             }
+//         }, 1)
+//     }
+//     prevElement = element
+// }
 
-// Smoothscroll Support check
-if (isSmoothScrollSupported === true) {
-    doScrolling = smoothScrollFunc;
-}
-else {
-    doScrolling = workAroundScrollFunc;
-}
+// // Smoothscroll Support check
+// if (isSmoothScrollSupported === true) {
+//     doScrolling = smoothScrollFunc;
+// }
+// else {
+//     doScrolling = workAroundScrollFunc;
+// }
 
 
 

@@ -1,6 +1,5 @@
 
 
-let doScrolling;
 const navAbout = document.querySelector('#nav-about');
 const navProjects = document.querySelector('#nav-projects');
 const navContact = document.querySelector('#nav-contact');
@@ -43,57 +42,57 @@ navContact.addEventListener('click', () => {
 });
 
 // NORMAL SMOOTH SCROLL FUNC
-const smoothScrollFunc = function (element, navButton) {
+let doScrolling = function (element, navButton) {
 
     element.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
 }
 
 // WORK AROUND SCROLL LOOP
-let prevElement = 0;
-let counter = 0;
+// let prevElement = 0;
+// let counter = 0;
 
-const workAroundScrollFunc = function(element) {
+// const workAroundScrollFunc = function(element) {
 
-    let elementYPos = element.getBoundingClientRect().y;
+//     let elementYPos = element.getBoundingClientRect().y;
 
-    if (element.offsetTop === prevElement.offsetTop) {
-        return
-    }
+//     if (element.offsetTop === prevElement.offsetTop) {
+//         return
+//     }
 
-    else if ( wrapper.scrollTop > element.offsetTop) {
-        let timer = setInterval(() => {
-            wrapper.scrollBy(0, (Math.floor(elementYPos * 0.02) + 48));
+//     else if ( wrapper.scrollTop > element.offsetTop) {
+//         let timer = setInterval(() => {
+//             wrapper.scrollBy(0, (Math.floor(elementYPos * 0.02) + 48));
 
-            counter++
+//             counter++
 
-            if (wrapper.scrollTop <= element.offsetTop) {
-                clearInterval(timer);
-                counter = 0;
-            }
-        }, 1)
-    }
-    else if (wrapper.scrollTop < element.offsetTop) {
-        let timer = setInterval(() => {
-            wrapper.scrollBy(0, (Math.floor(elementYPos * 0.02) - 48));
+//             if (wrapper.scrollTop <= element.offsetTop) {
+//                 clearInterval(timer);
+//                 counter = 0;
+//             }
+//         }, 1)
+//     }
+//     else if (wrapper.scrollTop < element.offsetTop) {
+//         let timer = setInterval(() => {
+//             wrapper.scrollBy(0, (Math.floor(elementYPos * 0.02) - 48));
 
-            counter++
+//             counter++
 
-            if (wrapper.scrollTop >= element.offsetTop) {
-                clearInterval(timer);
-                counter = 0;
-            }
-        }, 1)
-    }
-    prevElement = element
-}
+//             if (wrapper.scrollTop >= element.offsetTop) {
+//                 clearInterval(timer);
+//                 counter = 0;
+//             }
+//         }, 1)
+//     }
+//     prevElement = element
+// }
 
-// Smoothscroll Support check
-if (isSmoothScrollSupported === true) {
-    doScrolling = smoothScrollFunc;
-}
-else {
-    doScrolling = workAroundScrollFunc;
-}
+// // Smoothscroll Support check
+// if (isSmoothScrollSupported === true) {
+//     doScrolling = smoothScrollFunc;
+// }
+// else {
+//     doScrolling = workAroundScrollFunc;
+// }
 
 
 
